@@ -9,4 +9,5 @@
 
 ## バックエンド
 
-- Go
+- NestJS
+- TypeScript
