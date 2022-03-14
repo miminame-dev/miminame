@@ -2,3 +2,7 @@
 **/supabase/.branches
 **/supabase/.temp
 **/supabase/.env
+
+# VSCode
+*.code-workspace
+.vscode/
