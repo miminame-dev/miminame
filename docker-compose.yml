@@ -45,10 +45,24 @@ services:
       - MYSQL_DATABASE=db
       - MYSQL_USER=user
       - MYSQL_PASSWORD=pass
-      - MYSQL_RANDOM_ROOT_PASSWORD=1
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_ROOT_HOST=%
     volumes:
       - mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=pass
+    ports:
+      - 1234:80
+    volumes:
+      - phpmyadmin:/sessions
 
 volumes:
   minio:
   mysql:
+  phpmyadmin:
