@@ -3,6 +3,8 @@ version: "3"
 services:
   backend:
     image: cosmtrek/air
+    ports:
+      - 1323:1323
     working_dir: /work/backend
     volumes:
       - .:/work
