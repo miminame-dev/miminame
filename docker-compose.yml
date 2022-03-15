@@ -5,6 +5,10 @@ services:
     image: cosmtrek/air
     ports:
       - 1323:1323
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASSWORD=pass
     working_dir: /work/backend
     volumes:
       - .:/work
