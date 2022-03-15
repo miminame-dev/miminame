@@ -6,3 +6,6 @@
 # VSCode
 *.code-workspace
 .vscode/
+
+# Go
+tmp
