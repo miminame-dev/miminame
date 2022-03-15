@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  backend:
+    image: cosmtrek/air
+    working_dir: /work/backend
+    volumes:
+      - .:/work
+
+  video-processor:
+    image: cosmtrek/air
+    working_dir: /work/video-processor
+    volumes:
+      - .:/work
