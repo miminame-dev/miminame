@@ -6,9 +6,19 @@ services:
     working_dir: /work/backend
     volumes:
       - .:/work
+    depends_on:
+      - rabbitmq
 
   video-processor:
     image: cosmtrek/air
     working_dir: /work/video-processor
     volumes:
       - .:/work
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3.9
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=pass
