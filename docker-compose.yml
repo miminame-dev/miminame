@@ -32,8 +32,8 @@ services:
       - 9001:9001
     command: server /data --console-address :9001
     environment:
-      - MINIO_ACCESS_KEY=accesskey
-      - MINIO_SECRET_KEY=secretkey
+      - MINIO_ROOT_USER=accesskey
+      - MINIO_ROOT_PASSWORD=secretkey
     volumes:
       - minio:/data
 
