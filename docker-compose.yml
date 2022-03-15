@@ -16,6 +16,7 @@ services:
       - .:/work
     depends_on:
       - rabbitmq
+      - minio
 
   rabbitmq:
     image: rabbitmq:3.9
