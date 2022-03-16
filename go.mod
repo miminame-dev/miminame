@@ -2,12 +2,12 @@ module github.com/miminame-dev/miminame
 
 go 1.17
 
-require github.com/labstack/echo/v4 v4.7.1
-
 require (
-	github.com/heetch/confita v0.10.0 // indirect
-	github.com/stretchr/testify v1.7.1-0.20210427113832-6241f9ab9942 // indirect
+	github.com/heetch/confita v0.10.0
+	github.com/labstack/echo/v4 v4.7.1
 )
+
+require github.com/stretchr/testify v1.7.1-0.20210427113832-6241f9ab9942 // indirect
 
 require (
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
