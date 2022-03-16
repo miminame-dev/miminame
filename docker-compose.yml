@@ -18,6 +18,10 @@ services:
 
   video-processor:
     image: cosmtrek/air
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASSWORD=pass
     working_dir: /work/video-processor
     volumes:
       - .:/work
