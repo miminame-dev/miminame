@@ -5,10 +5,8 @@ services:
     image: cosmtrek/air
     ports:
       - 1323:1323
-    environment:
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_USER=user
-      - RABBITMQ_PASSWORD=pass
+    env_file:
+      - .env
     working_dir: /work/backend
     volumes:
       - .:/work
@@ -18,10 +16,8 @@ services:
 
   video-processor:
     image: cosmtrek/air
-    environment:
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_USER=user
-      - RABBITMQ_PASSWORD=pass
+    env_file:
+      - .env
     working_dir: /work/video-processor
     volumes:
       - .:/work
