@@ -6,8 +6,8 @@ import (
 	"log"
 
 	"cloud.google.com/go/pubsub"
-	"github.com/miminame-dev/miminame/pkg/message"
 	"github.com/miminame-dev/miminame/video-processor/pkg/config"
+	"github.com/miminame-dev/miminame/video-processor/pkg/message"
 )
 
 func main() {
@@ -36,11 +36,11 @@ func main() {
 			return
 		}
 
-		log.Println("Start process:", msg.VideoID)
-		process(msg.VideoID)
+		log.Println("Start process:", msg.Name)
+		process(msg.Name)
 	})
 }
 
-func process(videoID string) error {
+func process(name string) error {
 	return nil
 }

@@ -1,5 +1,23 @@
 package message
 
+import "time"
+
 type ProcessVideoMessage struct {
-	VideoID string `json:"videoID"`
+	Kind                    string    `json:"kind"`
+	ID                      string    `json:"id"`
+	SelfLink                string    `json:"selfLink"`
+	Name                    string    `json:"name"`
+	Bucket                  string    `json:"bucket"`
+	Generation              string    `json:"generation"`
+	Metageneration          string    `json:"metageneration"`
+	ContentType             string    `json:"contentType"`
+	TimeCreated             time.Time `json:"timeCreated"`
+	Updated                 time.Time `json:"updated"`
+	StorageClass            string    `json:"storageClass"`
+	TimeStorageClassUpdated time.Time `json:"timeStorageClassUpdated"`
+	Size                    string    `json:"size"`
+	Md5Hash                 string    `json:"md5Hash"`
+	MediaLink               string    `json:"mediaLink"`
+	CRC32C                  string    `json:"crc32c"`
+	Etag                    string    `json:"etag"`
 }
