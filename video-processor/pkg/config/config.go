@@ -8,9 +8,7 @@ import (
 )
 
 type Config struct {
-	RabbitMQHost     string `config:"RABBITMQ_HOST"`
-	RabbitMQUser     string `config:"RABBITMQ_USER"`
-	RabbitMQPassword string `config:"RABBITMQ_PASSWORD"`
+	ProjectID string `config:"PROJECT_ID"`
 }
 
 func Load() (*Config, error) {

@@ -1,11 +1,13 @@
 package main
 
 import (
-	"fmt"
+	"context"
+	"encoding/json"
 	"log"
 
+	"cloud.google.com/go/pubsub"
+	"github.com/miminame-dev/miminame/pkg/message"
 	"github.com/miminame-dev/miminame/video-processor/pkg/config"
-	"github.com/streadway/amqp"
 )
 
 func main() {
@@ -14,62 +16,29 @@ func main() {
 		log.Fatalf("failed to load config: %+v", err)
 	}
 
-	conn, err := amqp.Dial(fmt.Sprintf(
-		"amqp://%s:%s@%s:5672/",
-		cfg.RabbitMQUser,
-		cfg.RabbitMQPassword,
-		cfg.RabbitMQHost,
-	))
+	ctx := context.Background()
+
+	client, err := pubsub.NewClient(ctx, cfg.ProjectID)
 	if err != nil {
-		log.Fatalf("failed to open connection: %+v", err)
+		log.Fatalf("failed to create client: %+v", err)
 	}
 
-	defer conn.Close()
+	defer client.Close()
 
-	ch, err := conn.Channel()
-	if err != nil {
-		log.Fatalf("failed to open channel: %+v", err)
-	}
+	sub := client.Subscription("process-video-sub")
 
-	defer ch.Close()
+	sub.Receive(ctx, func(ctx context.Context, m *pubsub.Message) {
+		defer m.Ack()
 
-	q, err := ch.QueueDeclare(
-		"ProcessVideo",
-		false,
-		false,
-		false,
-		false,
-		nil,
-	)
-	if err != nil {
-		log.Fatalf("failed to declare a queue: %+v", err)
-	}
-
-	msgs, err := ch.Consume(
-		q.Name,
-		"",
-		true,
-		false,
-		false,
-		false,
-		nil,
-	)
-	if err != nil {
-		log.Fatalf("failed to register a consumer: %+v", err)
-	}
-
-	go func() {
-		for d := range msgs {
-			videoID := string(d.Body)
-			log.Println("Start process:", videoID)
-			if err := process(videoID); err != nil {
-				log.Printf("failed to process %s: %+v", videoID, err)
-			}
+		msg := new(message.ProcessVideoMessage)
+		if err := json.Unmarshal(m.Data, msg); err != nil {
+			log.Println("failed to unmarshal json: %+v", err)
+			return
 		}
-	}()
 
-	forever := make(chan struct{})
-	<-forever
+		log.Println("Start process:", msg.VideoID)
+		process(msg.VideoID)
+	})
 }
 
 func process(videoID string) error {

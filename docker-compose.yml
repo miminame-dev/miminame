@@ -10,6 +10,7 @@ services:
     working_dir: /work/backend
     volumes:
       - .:/work
+      - ~/.config/gcloud/application_default_credentials.json:/root/.config/gcloud/application_default_credentials.json:ro
     depends_on:
       - rabbitmq
       - mysql
@@ -21,27 +22,11 @@ services:
     working_dir: /work/video-processor
     volumes:
       - .:/work
+      - ~/.config/gcloud/application_default_credentials.json:/root/.config/gcloud/application_default_credentials.json:ro
     depends_on:
       - rabbitmq
       - minio
       - mysql
-
-  rabbitmq:
-    image: rabbitmq:3.9
-    environment:
-      - RABBITMQ_DEFAULT_USER=user
-      - RABBITMQ_DEFAULT_PASS=pass
-
-  minio:
-    image: minio/minio:RELEASE.2022-03-14T18-25-24Z
-    ports:
-      - 9001:9001
-    command: server /data --console-address :9001
-    environment:
-      - MINIO_ROOT_USER=accesskey
-      - MINIO_ROOT_PASSWORD=secretkey
-    volumes:
-      - minio:/data
 
   mysql:
     image: mysql:8.0
@@ -67,6 +52,5 @@ services:
       - phpmyadmin:/sessions
 
 volumes:
-  minio:
   mysql:
   phpmyadmin:

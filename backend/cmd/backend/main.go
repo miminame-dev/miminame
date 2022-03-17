@@ -19,9 +19,8 @@ func main() {
 		log.Fatalf("failed to initialize props: %+v", err)
 	}
 
-	ctrl := controller.NewController(props)
+	_ = controller.NewController(props)
 
 	e := echo.New()
-	e.POST("/process-video", ctrl.PostProcessVideo)
 	e.Logger.Fatal(e.Start(":1323"))
 }
