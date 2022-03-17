@@ -4,8 +4,10 @@ go 1.17
 
 require (
 	cloud.google.com/go/pubsub v1.19.0
+	github.com/brpaz/echozap v1.1.2
 	github.com/heetch/confita v0.10.0
 	github.com/labstack/echo/v4 v4.7.1
+	go.uber.org/zap v1.21.0
 )
 
 require (
@@ -18,6 +20,8 @@ require (
 	github.com/googleapis/gax-go/v2 v2.1.1 // indirect
 	github.com/stretchr/testify v1.7.1-0.20210427113832-6241f9ab9942 // indirect
 	go.opencensus.io v0.23.0 // indirect
+	go.uber.org/atomic v1.9.0 // indirect
+	go.uber.org/multierr v1.8.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
 	google.golang.org/api v0.70.0 // indirect
