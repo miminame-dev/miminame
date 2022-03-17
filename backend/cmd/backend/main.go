@@ -1,8 +1,6 @@
 package main
 
 import (
-	"log"
-
 	"github.com/brpaz/echozap"
 	"github.com/labstack/echo/v4"
 	"github.com/miminame-dev/miminame/backend/controller"
@@ -17,12 +15,12 @@ func main() {
 
 	cfg, err := config.Load()
 	if err != nil {
-		log.Fatalf("failed to load config: %+v", err)
+		zap.S().Fatalf("failed to load config: %+v", err)
 	}
 
 	props, err := InitProps(cfg)
 	if err != nil {
-		log.Fatalf("failed to initialize props: %+v", err)
+		zap.S().Fatalf("failed to initialize props: %+v", err)
 	}
 
 	_ = controller.NewController(props)
